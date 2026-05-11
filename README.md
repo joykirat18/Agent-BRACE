@@ -145,29 +145,6 @@ python3 -m meow_tea_experiments.data_generation.generate_belief_state_dataset \
     --max_workers       8
 ```
 
-<!-- **AlfWorld:**
-
-```bash
-python3 -m meow_tea_experiments.data_generation.generate_belief_state_dataset_alfworld \
-    --parquet_path      data-alfworld-parquet/train.parquet \
-    --output_path       local/alfworld_belief_dataset/train_belief.jsonl \
-    --azure_api_version 2024-12-01-preview \
-    --gpt_model         gpt-4.1-mini \
-    --n_random_trajs    3 \
-    --max_random_steps  15 \
-    --random_seed_base  42 \
-    --max_workers       8
-``` -->
-
-<!-- Key arguments:
-
-| Argument | Default | Description |
-|---|---|---|
-| `--n_random_trajs` | 3 | Random trajectories per instance (diversity) |
-| `--max_random_steps` | 15 | Max steps per random trajectory |
-| `--max_instances` | 300 | Cap instances processed (0 = all); useful for dry runs |
-| `--max_workers` | 8 | Parallel instances; reduce if hitting API rate limits | -->
-
 ### Step 3 — Fine-tune the belief model (SFT)
 
 Train a Qwen2.5/3 model to predict belief states from the JSONL produced in Step 2. This SFT checkpoint is used as the belief model initialization before joint PPO training.
@@ -233,12 +210,6 @@ This starts an OpenAI-compatible server on port **8005** using `CUDA_VISIBLE_DEV
 
 ```bash
 sh recipes/textworld_basic_ppo_decouple_joint_belief_vllm.sh
-```
-
-**AlfWorld:**
-
-```bash
-sh recipes/alfworld_basic_ppo_decouple_joint_belief_vllm.sh
 ```
 
 Edit the `PROJECT CONFIG` block at the top of any recipe before running:
