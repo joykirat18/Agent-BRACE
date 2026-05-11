@@ -1,0 +1,177 @@
+# Format checks enforced on CI:
+# 1. Comments must appear above each field.
+# 2. There must be a blank line between each field.
+# 3. Inline comments (after a field on the same line) are not allowed.
+# 4. Indentation level is respected for nested fields.
+
+# environment config
+environment:
+
+  # # Required when using verl.utils.omega_conf_to_dataclass to instantiate dataclass configs
+  _target_: verl.workers.config.AgenticEnvironmentConfig
+
+  # Name of the environment, choose from ["textworld", "alfworld", "swegym", "custom"]
+  name: "textworld"
+
+  # Whether the environment is multiturn
+  is_multiturn: true
+
+  # Whether the interaction with the environment is asynchronous
+  is_async: false
+
+  # The maximum number of steps per episode
+  max_iter: 10
+
+  # The number of parallel trajectories to run per environment instance
+  n_traj: 1
+
+  # Whether to use belief state
+  use_belief_state: false
+
+  # Whether to use dynamic thinking
+  use_dynamic_thinking: false
+  # Whether to use intermediate reward
+  use_intermediate_reward: false
+
+  thinking_variant: step-by-step ## direct, step-by-step, belief_state, latent_belief_state
+
+  state_tracking_model: Qwen/Qwen3-30B-A3B-Instruct-2507
+
+  decouple_trajectory: false
+
+  # Finetuned belief model served via vLLM (OpenAI-compatible). Leave null if unused.
+  belief_state_model_url: null
+
+  belief_state_model_name: null
+
+  # HF path to belief-state CausalLM trained in-process with REINFORCE (overrides URL when set).
+  belief_lm_train_path: null
+
+  belief_lm_lr: 1.0e-5
+
+  belief_lm_max_gen_tokens: 512
+
+  # Per-turn cap on policy generation (null = no override; rollout.response_length is used).
+  max_tokens_per_turn: null
+
+  belief_lm_gradient_clip: 1.0
+
+  belief_lm_n_update_steps: 1
+
+  belief_alpha: 0.5
+
+  belief_discount_gamma: 0.9
+
+  belief_transition_weight: 0.5
+
+  belief_lm_cuda_device: 0
+
+  belief_lm_clip_ratio: 0.2
+
+  belief_lm_clip_ratio_low: null
+
+  belief_lm_clip_ratio_high: null
+
+  belief_lm_clip_ratio_c: 3.0
+
+  belief_lm_ppo_policy_loss_mode: vanilla
+
+  belief_lm_gen_temperature: 1.0
+
+  belief_lm_loss_agg_mode: token-mean
+
+  # Value function (critic) for the belief LM — mirrors veRL critic settings.
+  belief_lm_use_value_function: true
+  belief_lm_value_lr: 1.0e-5
+  belief_lm_value_clip_range: 0.5
+  belief_lm_gae_gamma: 1.0
+  belief_lm_gae_lambda: 0.95
+
+  # KL-to-reference regularizer on the belief LM (loads a frozen copy of the
+  # initial belief model and adds kl_coef * KL(π_belief || π_ref) to the PPO loss).
+  belief_lm_use_kl_loss: false
+  belief_lm_kl_loss_coef: 0.001
+  belief_lm_kl_loss_type: low_var_kl
+
+  # Belief-PPO batch balancing. Skip the update if <N trajectories have positive task
+  # reward (sparse-reward guard); otherwise subsample zero-reward-trajectory steps to
+  # at most ratio * n_positive_steps so PPO gets a usable signal/noise mix.
+  # Set ratio < 0 to disable balancing, 0 to keep only positives.
+  belief_lm_min_positive_trajectories: 1
+  belief_lm_neg_to_pos_ratio: 3.0
+
+  # Weight on LLM-judge state_tracking_r in belief total_reward.
+  # 0 disables the LLM judge; 1 gives it equal weight with discounted_task_r
+  # (brings the judge signal back into training). Requires belief_reward_model_url.
+  belief_lm_state_tracking_weight: 1.0
+
+  belief_lm_use_vllm_inference: true
+
+  # null = auto (true when policy rollout tensor_model_parallel_size > 1)
+  belief_lm_vllm_use_subprocess: null
+
+  belief_lm_vllm_max_model_len: 8192
+
+  belief_lm_vllm_max_num_batched_tokens: 8192
+
+  # Optional cap on concurrent sequences for belief vLLM (subprocess); null = omit
+  belief_lm_vllm_max_num_seqs: null
+
+  belief_lm_vllm_gpu_memory_utilization: 0.45
+
+  belief_lm_vllm_load_format: auto
+
+  belief_lm_vllm_seed: 0
+
+  # Latent diffusion belief state — only used when thinking_variant=latent_belief_state
+  use_diffusion_belief: false
+
+  diffusion_model_path: ""
+
+  diffusion_steps: 20
+
+  diffusion_cfg_scale: 1.5
+
+  n_belief_tokens: 4
+
+  diffusion_update_steps: 50
+
+  diffusion_lr: 1.0e-4
+# agent config
+agent:
+
+  # Required when using verl.utils.omega_conf_to_dataclass to instantiate dataclass configs
+  _target_: verl.workers.config.AgenticAgentConfig
+
+  # Whether the agent uses thinking
+  use_think: false
+
+  # Whether the agent uses tools
+  use_tool: false
+
+  # Whether the agent uses memory
+  use_memory: false
+
+# reward config
+reward:
+
+  # Required when using verl.utils.omega_conf_to_dataclass to instantiate dataclass configs
+  _target_: verl.workers.config.AgenticRewardConfig
+
+  # The density of the reward, choose from ["single", "dense"]
+  density: "single"
+
+  # The type of the reward, choose from ["verified", "learned"]
+  type: "verified"
+
+# agent loop config
+agent_loop:
+
+  # Required when using verl.utils.omega_conf_to_dataclass to instantiate dataclass configs
+  _target_: verl.workers.config.AgenticAgentLoopConfig
+
+  # The type of the agent loop, choose from ["swe_agent"]
+  type: null
+
+  # Additional kwargs for the agent loop
+  kwargs: {}

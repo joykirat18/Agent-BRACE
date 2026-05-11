@@ -1,0 +1,9 @@
+/* Make the content area full width */
+.wy-nav-content {
+    max-width: none !important;
+}
+
+/* Alternative: Set a larger max-width instead of removing it entirely */
+/* .wy-nav-content {
+    max-width: 1200px !important;
+} */

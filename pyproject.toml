@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meow-tea-taro"
+version = "0.1.0"
+description = "Meow Tea Taro: A Multi-turn Agentic Reinforcement Learning Framework"
+authors = [
+    {name = "Anonymous"}
+]
+license = {text = "Apache-2.0"}
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "textworld",
+    "alfworld",
+    "swe-rex"
+]
+
+[project.optional-dependencies]
+dev = [
+    # Testing
+    "pytest>=6.0",
+    "pytest-cov>=4.0",
+    
+    # Code quality
+    "black>=22.0",
+    "isort>=5.0",
+    "flake8>=4.0",
+    
+    # Documentation
+    "sphinx>=7.0",
+    "sphinx-rtd-theme>=2.0",
+    "sphinx-autodoc-typehints>=1.25",
+    "myst-parser>=2.0",  # Optional: if you want Markdown support
+    
+    # Other dev tools
+    "ipython>=8.0",
+    "pre-commit>=3.0",
+]
+
+[project.urls]
+Homepage = "[ANONYMIZED_URL]"
+Repository = "[ANONYMIZED_URL]"
+Issues = "[ANONYMIZED_URL]"
+
+[project.scripts]
+meow-tea-train = "meow_tea_train.cli:train_command"
+
+
+[tool.setuptools]
+packages = ["meow_tea_train", "meow_tea_train.verl", "verl", "meow_tea_gym", "sweagent", "meow_tea_experiments"]
+
+[tool.setuptools.package-dir]
+"meow_tea_train" = "meow_tea_train"
+"meow_tea_train.verl" = "meow_tea_train/verl"
+"verl" = "meow_tea_train/verl"
+"meow_tea_gym" = "meow_tea_gym"
+"sweagent" = "meow_tea_gym/SWE-agent/sweagent"
+"meow_tea_experiments" = "meow_tea_experiments"
+
+# Include non-Python files (config, tools, etc.)
+[tool.setuptools.package-data]
+sweagent = ["../config/**/*", "../tools/**/*"]
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 120

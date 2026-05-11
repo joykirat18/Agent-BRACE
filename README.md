@@ -3,7 +3,7 @@
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Joykirat Singh](https://joykirat18.github.io/) | [Zaid Khan](https://zaidkhan.me/) [Justin Chih-Yao Chen](https://dinobby.github.io/) | [Archiki Prasad](https://archiki.github.io/) | [Akshay Nambi](https://www.microsoft.com/en-us/research/people/akshayn/) | [Hyunji Lee](https://amy-hyunji.github.io/) | [Elias Stengel-Eskin](https://esteng.github.io/) | [Mohit Bansal](https://www.cs.unc.edu/~mbansal/)
+[Joykirat Singh](https://joykirat18.github.io/) | [Zaid Khan](https://zaidkhan.me/) | [Archiki Prasad](https://archiki.github.io/) | [Justin Chih-Yao Chen](https://dinobby.github.io/) | [Akshay Nambi](https://www.microsoft.com/en-us/research/people/akshayn/) | [Hyunji Lee](https://amy-hyunji.github.io/) | [Elias Stengel-Eskin](https://esteng.github.io/) | [Mohit Bansal](https://www.cs.unc.edu/~mbansal/)
 
 ## Overview
 This repository contains the implementation of AGENT-Brace (Agent Belief state Representation via Abstraction and Confidence Estimation), a method that decouples an LLM agent into a belief state model and a policy model, jointly optimized via reinforcement learning.
