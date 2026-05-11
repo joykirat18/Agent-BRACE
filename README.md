@@ -6,7 +6,7 @@
 [Joykirat Singh](https://joykirat18.github.io/) | [Zaid Khan](https://zaidkhan.me/) | [Archiki Prasad](https://archiki.github.io/) | [Justin Chih-Yao Chen](https://dinobby.github.io/) | [Akshay Nambi](https://www.microsoft.com/en-us/research/people/akshayn/) | [Hyunji Lee](https://amy-hyunji.github.io/) | [Elias Stengel-Eskin](https://esteng.github.io/) | [Mohit Bansal](https://www.cs.unc.edu/~mbansal/)
 
 ## Overview
-This repository contains the implementation of AGENT-Brace (Agent Belief state Representation via Abstraction and Confidence Estimation), a method that decouples an LLM agent into a belief state model and a policy model, jointly optimized via reinforcement learning.
+This repository contains the implementation of agent-BRACE (Agent Belief state Representation via Abstraction and Confidence Estimation), a method that decouples an LLM agent into a belief state model and a policy model, jointly optimized via reinforcement learning.
 
 ![Overview of Agent-BRACE](/assets/image.png)
 The agent is decomposed into a belief state model $f_\phi$ and a policy model $\pi_\theta$, jointly optimized via PPO (dual training). At each step $t$, $f_\phi$ consumes the goal $G$, previous belief $b_{t}$, and new observation $o_{t+1}$ to produce an updated belief $b_{t+1}$ with WEPs-based certainty labels (Belief State Update). The policy $\pi_\theta$ then selects an action $a_t$ conditioned on $(G, b_{t+1}, o_{t+1})$ rather than the full history $\mathcal{H}_t$ (Action Selection). The belief model is trained with a composite reward $R^{\text{belief}}$, while the policy model is trained with a binary environment reward $R^{\text{env}}$.
