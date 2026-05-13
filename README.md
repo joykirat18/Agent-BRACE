@@ -1,6 +1,6 @@
-# Agent-BRACE: Decoupling Beliefs from Actions in Long-Horizon Tasks via Verbalized State Uncertainty
+# [Agent-BRACE: Decoupling Beliefs from Actions in Long-Horizon Tasks via Verbalized State Uncertainty](https://arxiv.org/abs/2605.11436)
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-red)]()
+[![Paper](https://img.shields.io/badge/Paper-arXiv-red)](https://arxiv.org/abs/2605.11436)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [Joykirat Singh](https://joykirat18.github.io/) | [Zaid Khan](https://zaidkhan.me/) | [Archiki Prasad](https://archiki.github.io/) | [Justin Chih-Yao Chen](https://dinobby.github.io/) | [Akshay Nambi](https://www.microsoft.com/en-us/research/people/akshayn/) | [Hyunji Lee](https://amy-hyunji.github.io/) | [Elias Stengel-Eskin](https://esteng.github.io/) | [Mohit Bansal](https://www.cs.unc.edu/~mbansal/)
@@ -320,4 +320,13 @@ Results are written as one `.jsonl` file per checkpoint step under `local/val_re
 If you use AGENT-BRACE in your work, please cite:
 
 ```bibtex
-```# Agent-BRACE
+@misc{singh2026agentbracedecouplingbeliefsactions,
+      title={Agent-BRACE: Decoupling Beliefs from Actions in Long-Horizon Tasks via Verbalized State Uncertainty}, 
+      author={Joykirat Singh and Zaid Khan and Archiki Prasad and Justin Chih-Yao Chen and Akshay Nambi and Hyunji Lee and Elias Stengel-Eskin and Mohit Bansal},
+      year={2026},
+      eprint={2605.11436},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2605.11436}, 
+}
+```
